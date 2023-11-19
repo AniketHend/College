@@ -3,7 +3,7 @@ void solve(int i, int target, vector<int>&a, std::vector<int>arr, std::vector<ve
         ans.push_back(arr);
         return;
     }
-    if (i > a.size()) {
+    if (i >= a.size()) {
         return;
     }
     arr.push_back(a[i]);
