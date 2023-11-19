@@ -7,34 +7,6 @@ struct item
     double weight;
 };
 
-int maxProfit(int index, int cap, int n, std::vector<item> &store, vector<vector<int>> &dp, vector<int> &taken)
-{
-    if (index < 0 || cap <= 0)
-    {
-        return 0;
-    }
-    if (dp[index][cap] != -1)
-    {
-        return dp[index][cap];
-    }
-    int take = 0, notake = 0;
-    notake = maxProfit(index - 1, cap, n, store, dp, taken);
-    if (cap >= store[index].weight)
-    {
-        take = store[index].profit + maxProfit(index - 1, cap - store[index].weight, n, store, dp, taken);
-    }
-    if (take >= notake)
-    {
-        taken[index] = 1;
-    }
-    else
-    {
-        taken[index] = 0;
-    }
-
-    return dp[index][cap] = std::max(take, notake);
-}
-
 int main()
 {
     // std::cout << "Enter number of items and capacity of the bag \n";
