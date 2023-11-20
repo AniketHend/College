@@ -89,6 +89,12 @@ public:
     }
 };
 
+void printPath(vector<pair<int, int>>&p) {
+    for (auto i : p) {
+        cout << i.first + 1 << "->" << i.second + 1 << endl;
+    }
+}
+
 void TSP(vector<vector<int>>&adj) {
     int n = adj.size();
     vector<pair<int, int>>path;
@@ -103,11 +109,10 @@ void TSP(vector<vector<int>>&adj) {
         Node* cur = pq.top();
         pq.pop();
         int ver = cur->Vertex;
-        cout << ver << endl;
         if (cur->Level == n - 1) {
             cur->Path.push_back({ver, 0});
             cout << "Path\n";
-            // printPath(cur->Path);
+            printPath(cur->Path);
             cout << "Cost :" << cur->Cost << endl;
             return;
         }
@@ -116,11 +121,9 @@ void TSP(vector<vector<int>>&adj) {
             if (cur->Matrix[ver][i] != INT_MAX) {
                 Node * child = newNode(cur->Matrix, cur->Path, cur->Level + 1, ver, i);
                 child->Cost = cur->Cost +  cur->Matrix[ver][i] + cost_calculation(cur->Matrix);
-                cout << child->Cost << " " << i << endl;
                 pq.push(child);
             }
         }
-        cout << endl;
         delete cur;
     }
 }
